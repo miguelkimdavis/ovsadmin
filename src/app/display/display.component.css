@@ -1,0 +1,23 @@
+.candidate-details h2{
+    text-align: center;
+}
+
+i{
+    font-size: 15px;
+    cursor: pointer;
+    transition: ease-in-out 0.3s;
+}
+i:hover{
+    transform: scale(1.2);
+}
+
+img{
+    width: 115px;
+    height: 115px;
+}
+
+#arrow{
+    content: 'Sort';
+    color: gray;
+    
+}

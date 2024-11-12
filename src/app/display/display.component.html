@@ -1,0 +1,67 @@
+<div class="container">
+<!-- 
+    <div>
+        <input type="text" 
+            placeholder="Search by Position" 
+            [(ngModel)]="filterText">
+    </div> -->
+
+    <h2>Candidates List</h2>
+
+    <app-loader *ngIf="isLoading"></app-loader>
+    <app-snackbar [errorMessage]="errorMessage" *ngIf="errorMessage"></app-snackbar>
+    <app-snackbar [successMessage]="successMessage" *ngIf="successMessage"></app-snackbar>
+    <app-modal *ngIf="showModal"></app-modal>
+
+    <table id="candidatesTable" class="table table-bordered" [hidden]="isLoading">
+        <thead>
+        <tr>
+        <th scope="col" (click)="sortPosition('position')" [ngStyle]="{'cursor': 'pointer'}">Position</th>
+        <th scope="col">Name</th>
+        <th>Email</th>
+        <th scope="col">Age</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Party</th>
+        <th scope="col">Course</th>
+        <th scope="col">Year</th>
+        <!-- <th>Photo</th> -->
+        <th>Edit</th>
+        <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+                <tr *ngFor="let candidate of candidates">
+                <td>{{ candidate.position }}</td>
+                <td>{{ candidate.name }}</td>
+                <td>{{ candidate.email }}</td>
+                <td>{{ candidate.age }}</td>
+                <td>{{ candidate.gender }}</td>
+                <td>{{ candidate.party }}</td>
+                <td>{{ candidate.course }}</td>
+                <td>{{ candidate.year }}</td>
+                <!-- <td><img src="{{ candidate.photo }}" alt="{{ candidate.name }}" style="width: 50px; height: auto;"></td> -->
+                <td>
+                <a [routerLink]="['/candidates/edit', candidate.id]"><i class="fa fa-pencil" title="Edit" (click)="onEditCandidate(candidate)"></i></a>
+                </td>
+                <td>
+                    <!-- <i class="fa fa-trash" title="Delete" style="color: red;" (click)="openDeleteModal()"></i> -->
+
+                    <ng-template #content let-c="close" let-d="dismiss">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+                            <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Hello, World!</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" (click)="c('Save click')">Save</button>
+                        </div>
+                    </ng-template>
+                    
+                    <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+                </td>
+                </tr>
+        </tbody>
+        </table>
+</div>

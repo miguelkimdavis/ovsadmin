@@ -1,0 +1,93 @@
+<div class="container">
+
+    <app-loader *ngIf="isLoading"></app-loader>
+    <app-snackbar [errorMessage]="errorMessage" *ngIf="errorMessage"></app-snackbar>
+    <app-snackbar [successMessage]="successMessage" *ngIf="successMessage"></app-snackbar>  
+
+    <form #editForm = ngForm (ngSubmit)="onEdit(editForm)" [hidden]="isLoading">
+        <h2>EDIT CANDIDATE</h2>
+        <h4>FILL IN CANDIDATES' DETAILS</h4>
+        <labeL class="label">Name:</labeL>
+        <input 
+            type="text" 
+            name="name"
+            value="name"
+            required
+            [(ngModel)]="currentCandidate.name">
+       
+        <label class="label">Email:</label>
+        <input 
+            type="email"
+            name="email"
+            value="email"
+            required
+            [(ngModel)]="currentCandidate.email">
+        
+        <label class="label">Age:</label>
+        <input 
+            type="number"
+            name="age"
+            value="age"
+            id="candidateAge"
+            required
+            [(ngModel)]="currentCandidate.age">
+
+        <label class="label">Gender:</label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" value="male" id="male" [(ngModel)]="currentCandidate.gender">
+            <label class="form-check-label" for="male">
+                MALE
+            </label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" value="female" id="female" [(ngModel)]="currentCandidate.gender">
+            <label class="form-check-label" for="female">
+                FEMALE
+            </label>
+        </div>
+       
+        <labeL class="label">Party:</labeL>
+        <input 
+            type="text"
+            name="party"
+            value="party"
+            required
+            [(ngModel)]="currentCandidate.party">
+        
+        <labeL class="label">Course:</labeL>
+        <input 
+            type="text"
+            name="course"
+            value="course"
+            required
+            [(ngModel)]="currentCandidate.course">
+        
+        <labeL class="label">Year:</labeL>
+        <input 
+            type="number"
+            name="year"
+            value="year"
+            required
+            [(ngModel)]="currentCandidate.year">
+      
+        <!-- <label class="label">Upload Image:</label>
+        <input 
+            type="file"
+            name="photo"
+            value="photo"
+            required
+            [(ngModel)]="currentCandidate.photo"> -->
+        
+        <label class="label">Position:</label>
+        <select name="position" required [(ngModel)]="currentCandidate.position">
+            <option value="president">President</option>
+            <option value="deputypresident">Deputy President</option>
+            <option value="primeminister">Prime Minister</option>
+        </select>
+
+        <button [disabled]="editForm.invalid" class="btn btn-primary" type="submit">EDIT</button>
+
+        <p *ngIf="editForm.invalid && editForm.dirty" id="errorMessage">REQUIRED FIELD</p>
+    </form>
+</div>
