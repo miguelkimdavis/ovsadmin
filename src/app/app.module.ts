@@ -14,9 +14,6 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
 import { LoaderComponent } from './utility/loader/loader.component';
 import { SnackbarComponent } from './utility/snackbar/snackbar.component';
-import { ModalComponent } from './utility/modal/modal.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +24,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     EditComponent,
     LoaderComponent,
     SnackbarComponent,
-    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +32,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig), 
     AngularFirestoreModule,
-    NgbModule
   ],
   
   providers: [],

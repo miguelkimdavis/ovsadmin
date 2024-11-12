@@ -21,3 +21,18 @@ img{
     color: gray;
     
 }
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#xIcon {
+    font-size: 1.25rem;
+}
+  
+  
+    
