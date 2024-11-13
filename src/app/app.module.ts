@@ -9,13 +9,15 @@ import { EditComponent } from './edit/edit.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DisplayComponent } from './display/display.component';
+import { LoaderComponent } from './utility/loader/loader.component';
+import { SnackbarComponent } from './utility/snackbar/snackbar.component';
+import { RouterModule } from '@angular/router';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment';
-import { LoaderComponent } from './utility/loader/loader.component';
-import { SnackbarComponent } from './utility/snackbar/snackbar.component';
+
 @NgModule({
-  declarations: [
+    declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
@@ -30,6 +32,7 @@ import { SnackbarComponent } from './utility/snackbar/snackbar.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    RouterModule,
     AngularFireModule.initializeApp(environment.firebaseConfig), 
     AngularFirestoreModule,
   ],

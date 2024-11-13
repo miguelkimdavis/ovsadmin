@@ -14,8 +14,8 @@ export class CandidateDataService {
   candidatesRef: AngularFirestoreCollection<Candidates>;
 
   constructor(private db: AngularFirestore) {
-    this.candidatesRef = db.collection(this.dbPath);
-  }
+    this.candidatesRef = db.collection(this.dbPath, ref => ref.orderBy('position'));
+}
 
   createCandidate(candidate: Candidates): any {
     return this.candidatesRef.add({ ...candidate });

@@ -51,23 +51,22 @@ export class DisplayComponent implements OnInit {
   // }
 
   
-  sortPosition(property: string) {
-    console.log('Sorting by:', property);
-    this.isDesc = !this.isDesc;
-    const direction = this.isDesc ? 1 : -1;
-    this.candidates?.sort((a: any, b: any) => {
-      if (a[property] < b[property]) {
-        return -1 * direction;
-      }
-      else if (a[property] > b[property]) {
-        return 1 * direction;
-      } 
-      else {
-        return 0;
-      }
-    });
-    console.log('Sorted candidates:', this.candidates);
-  }
+  // sortPosition(property: string) {
+  //   console.log('Sorting by:', property);
+  //   this.isDesc = !this.isDesc;
+  //   const direction = this.isDesc ? 1 : -1;
+  //   this.candidates?.sort((a: any, b: any) => {
+  //     if (a[property] < b[property]) {
+  //       return -1 * direction;
+  //     }
+  //     else if (a[property] > b[property]) {
+  //       return 1 * direction;
+  //     } 
+  //     else {
+  //       return 0;
+  //     }
+  //   });
+  // }
 
   refreshList(): void {
     this.currentCandidate = undefined;
