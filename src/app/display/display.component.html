@@ -4,14 +4,18 @@
         <input type="text" 
             placeholder="Search by Position" 
             [(ngModel)]="filterText">
-    </div> -->
-
-    <h2>Candidates List</h2>
-
+    </div> -->  
     <app-loader *ngIf="isLoading"></app-loader>
     <app-snackbar [errorMessage]="errorMessage" *ngIf="errorMessage"></app-snackbar>
     <app-snackbar [successMessage]="successMessage" *ngIf="successMessage"></app-snackbar>
     
+    <div class="div">
+        <h2>Candidates List</h2>
+        <a [routerLink]="['/add-candidates-form']">
+            <button type="button" class="btn btn-primary">ADD CANDIDATE</button>
+        </a>
+    </div>
+
     <table id="candidatesTable" class="table table-bordered" [hidden]="isLoading">
         <thead>
         <tr>
@@ -41,7 +45,9 @@
                 <td>{{ candidate.year }}</td>
                 <!-- <td><img src="{{ candidate.photo }}" alt="{{ candidate.name }}" style="width: 50px; height: auto;"></td> -->
                 <td>
-                <a [routerLink]="['/candidates/edit', candidate.id]"><i class="fa fa-pencil" title="Edit" (click)="onEditCandidate(candidate)"></i></a>
+                    <a [routerLink]="['/edit', candidate.id]"> 
+                        <i class="fa fa-pencil" title="Edit" (click)="onEditCandidate(candidate)"></i>
+                    </a>
                 </td>
                 <td>     
                     <i class="fa fa-trash" title="Delete" [ngStyle]="{'color':'red'}" (click)="openModal()"></i>

@@ -34,5 +34,8 @@ img{
     font-size: 1.25rem;
 }
   
-  
-    
+.div{
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+}

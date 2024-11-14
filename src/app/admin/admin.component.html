@@ -4,7 +4,7 @@
     <app-snackbar [successMessage]="successMessage" *ngIf="successMessage"></app-snackbar>
     <app-loader *ngIf="isLoading"></app-loader>
 
-    <form #adminForm = ngForm (ngSubmit)="onSubmit(adminForm)">
+    <form #adminForm = ngForm (ngSubmit)="onSubmit(adminForm)" [hidden]="isLoading">
         <h2>FILL IN CANDIDATES' DETAILS</h2>
         <label class="label">Name:</label>
         <input 

@@ -34,8 +34,8 @@ export class AdminComponent implements OnInit {
   }
 
   onSubmit(candidateForm: NgForm) {
+    this.isLoading = true;
     console.log(candidateForm.value);
-
     if (candidateForm.value.age < 18) {
       this.errorMessage = "Candidate Must Be 18+"
     }
@@ -43,6 +43,7 @@ export class AdminComponent implements OnInit {
       this.candidate = candidateForm.value;
       this.candidateDataService.createCandidate(this.candidate)
       .then(()=>{
+        this.isLoading = false; 
         this.successMessage = "New Candidate Added"
         setTimeout(()=>{
           this.successMessage = null;
