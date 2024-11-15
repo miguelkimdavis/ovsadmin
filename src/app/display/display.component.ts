@@ -16,58 +16,16 @@ export class DisplayComponent implements OnInit {
   isLoading: boolean = false;
   errorMessage: string | null = null;
   successMessage: string | null = null;
-  isDesc: boolean = false;
-  filteredCandidates: Candidates[] | undefined;
-  _filterText: string = '';
   
   constructor(
     private route: Router,
     private candidateDataService: CandidateDataService
   ) {}
-
+  
   ngOnInit(): void {
     this.retrieveCandidates();
-  } 
-
-
-  // get filterText(){
-  //   return this._filterText;
-  // }
-
-  // set filterText(value: string) {
-  //   this._filterText = value;
-  //   this.filteredCandidates = this.filterCandidatesByPosition(value)
-  // }
-
-  // filterCandidatesByPosition(filterTerms:string){
-  //   if(this.candidates?.length == 0 || this.filterText == ''){
-  //     return this.candidates
-  //   }
-  //   else{
-  //     return this.candidates?.filter((candidate)=>{
-  //       return candidate.position?.toLowerCase() === filterTerms.toLowerCase()
-  //     })
-  //   }
-  // }
-
+  }  
   
-  // sortPosition(property: string) {
-  //   console.log('Sorting by:', property);
-  //   this.isDesc = !this.isDesc;
-  //   const direction = this.isDesc ? 1 : -1;
-  //   this.candidates?.sort((a: any, b: any) => {
-  //     if (a[property] < b[property]) {
-  //       return -1 * direction;
-  //     }
-  //     else if (a[property] > b[property]) {
-  //       return 1 * direction;
-  //     } 
-  //     else {
-  //       return 0;
-  //     }
-  //   });
-  // }
-
   refreshList(): void {
     this.currentCandidate = undefined;
     this.currentIndex = -1;
@@ -104,6 +62,15 @@ export class DisplayComponent implements OnInit {
       modal.style.display = 'block';
     }
   }
+
+
+  openDeleteAllCandidatesModal(){
+    const modal = document.getElementById('deleteModalCenter');
+    if (modal) {
+      modal.classList.add('show');
+      modal.style.display = 'block';
+    }
+  }
   
   closeModal() {
     const modal = document.getElementById('deleteModalCenter');
@@ -131,4 +98,23 @@ export class DisplayComponent implements OnInit {
         },5000)
       });
   }
+
+  deleteAllCandidates(): void {
+    this.isLoading = true;
+    this.candidateDataService.deleteAllCandidates()
+      .then(() => {
+        this.isLoading = false;
+        this.successMessage = 'All candidates have been successfully deleted.';
+        setTimeout(()=>{
+          this.errorMessage = null;
+        },3000)
+      })
+      .catch(error => {
+        this.errorMessage = 'Failed to delete candidates: ';
+        setTimeout(()=>{
+          this.errorMessage = null;
+        },5000)
+      });
+  }
+
 }

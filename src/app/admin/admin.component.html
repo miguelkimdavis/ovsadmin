@@ -28,8 +28,7 @@
             required
             ngModel>
        
-        <label class="label"y>Gender:</label>
-
+        <label class="label">Gender:</label>
         <div class="form-check">
             <input class="form-check-input" name="gender" type="radio" value="male" id="male" ngModel>
             <label class="form-check-label" for="male">
@@ -77,6 +76,12 @@
             <option value="deputypresident">Deputy President</option>
             <option value="primeminister">Prime Minister</option>
         </select>
+
+        <labeL class="label">Votes:
+            <input type="number" 
+                name="votes" 
+                required ngModel>
+        </labeL>
 
         <button [disabled]="adminForm.invalid" class="btn btn-primary" type="submit">Submit</button>
 

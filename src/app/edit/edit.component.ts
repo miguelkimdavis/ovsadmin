@@ -45,8 +45,8 @@ export class EditComponent implements OnInit {
   }
 
   onEdit(editForm: NgForm){
-    if(editForm.value.age < 18){
-      this.errorMessage = "Candidatae must be 18 or above";
+    if(editForm.value.age < 18 || editForm.value.votes < 0 || editForm.value.votes > 0){
+      this.errorMessage = "ERROR ADDING CANDIDATE: ENSURE CANDIDATE IS OVER 18 AND THE DEFAULT VOTE IS 0";
       setTimeout(()=>{
         this.errorMessage = null;
       },5000)

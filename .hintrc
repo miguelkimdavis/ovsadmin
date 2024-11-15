@@ -16,6 +16,12 @@
       {
         "aria-allowed-attr": "off"
       }
+    ],
+    "axe/parsing": [
+      "default",
+      {
+        "duplicate-id-active": "off"
+      }
     ]
   }
 }

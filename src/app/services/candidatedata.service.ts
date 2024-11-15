@@ -17,7 +17,7 @@ export class CandidateDataService {
     this.candidatesRef = db.collection(this.dbPath, ref => ref.orderBy('position'));
 }
 
-  createCandidate(candidate: Candidates): any {
+  createCandidate(candidate: Candidates){
     return this.candidatesRef.add({ ...candidate });
   }
 
@@ -52,4 +52,20 @@ export class CandidateDataService {
   deleteCandidate(id: string): Promise<void> {
     return this.candidatesRef.doc(id).delete();
   }
+
+  deleteAllCandidates(): Promise<void> {
+    return this.candidatesRef.get()
+    .toPromise()
+    .then(snapshot => {
+        if (snapshot && !snapshot.empty) {
+            const batch = this.db.firestore.batch();
+            snapshot.forEach(doc => {
+                batch.delete(doc.ref);
+            });
+            return batch.commit();
+        }
+        return Promise.resolve();
+    });
+}
+
 }

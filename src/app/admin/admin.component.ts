@@ -11,7 +11,7 @@ import { CandidateDataService } from '../services/candidatedata.service';
 })
 export class AdminComponent implements OnInit {
 
-  candidate: Candidates = {
+  candidate:Candidates = {
     name: '',
     email: '',
     age: 0,
@@ -20,7 +20,8 @@ export class AdminComponent implements OnInit {
     course: '',
     year: 0,
     photo: '',
-    position: ''
+    position: '',
+    votes:0,
   };
 
   constructor(private candidateDataService: CandidateDataService) {}
@@ -36,8 +37,11 @@ export class AdminComponent implements OnInit {
   onSubmit(candidateForm: NgForm) {
     this.isLoading = true;
     console.log(candidateForm.value);
-    if (candidateForm.value.age < 18) {
-      this.errorMessage = "Candidate Must Be 18+"
+    if (candidateForm.value.age < 18 || candidateForm.value.votes < 0 || candidateForm.value.votes > 0 ) {
+      this.errorMessage = "ERROR ADDING CANDIDATE: ENSURE CANDIDATE IS OVER 18 AND THE DEFAULT VOTE IS 0"
+      setTimeout(()=>{
+        this.errorMessage = null;
+      },5000)
     }
     else{
       this.candidate = candidateForm.value;
