@@ -8,26 +8,26 @@
         <a [routerLink]="['/add-candidates-form']">
             <button type="button" class="btn btn-primary">ADD CANDIDATE</button>
         </a>
-            <button type="button" class="btn btn-danger" (click)="openDeleteAllCandidatesModal()">DELETE CANDIDATE</button>
-            <div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="deleteModalTitle">CANDIDATE DELETE CONFIRMATION</h5>
-                            <button type="button" class="close" aria-label="Close" (click)="closeModal()">
-                                <i id="xIcon" class="fa fa-times" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            ARE YOU SURE YOU WANT TO DELETE All CANDIDATE?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" (click)="closeModal()">Close</button>
-                            <button type="button" class="btn btn-danger" (click)="deleteAllCandidates()">DELETE ALL CANDIDATES</button>
+            <button type="button" class="btn btn-danger" (click)="openDeleteAllCandidatesModal()">DELETE ALL CANDIDATES</button>
+                                <div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalTitle">CANDIDATE DELETE CONFIRMATION</h5>
+                                    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+                                        <i id="xIcon" class="fa fa-times" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    ARE YOU SURE YOU WANT TO DELETE CANDIDATE?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" (click)="closeModal()">Close</button>
+                                    <button type="button" class="btn btn-danger" (click)="deleteAllCandidates()">Delete</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
     </div>
 
     <table id="candidatesTable" class="table table-bordered" [hidden]="isLoading">
@@ -41,7 +41,6 @@
         <th scope="col">Party</th>
         <th scope="col">Course</th>
         <th scope="col">Year</th>
-        <th scope="col">Votes</th>
         <!-- <th>Photo</th> -->
         <th>Edit</th>
         <th>Delete</th>
@@ -57,7 +56,6 @@
                 <td>{{ candidate.party }}</td>
                 <td>{{ candidate.course }}</td>
                 <td>{{ candidate.year }}</td>
-                <td>{{candidate.votes}}</td>
                 <!-- <td><img src="{{ candidate.photo }}" alt="{{ candidate.name }}" style="width: 50px; height: auto;"></td> -->
                 <td>
                     <a [routerLink]="['/edit', candidate.id]"> 
@@ -77,7 +75,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    ARE YOU SURE YOU WANT TO DELETE THIS CANDIDATE?
+                                    ARE YOU SURE YOU WANT TO DELETE CANDIDATE?
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" (click)="closeModal()">Close</button>

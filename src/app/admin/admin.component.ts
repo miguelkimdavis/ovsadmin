@@ -37,8 +37,8 @@ export class AdminComponent implements OnInit {
   onSubmit(candidateForm: NgForm) {
     this.isLoading = true;
     console.log(candidateForm.value);
-    if (candidateForm.value.age < 18 || candidateForm.value.votes < 0 || candidateForm.value.votes > 0 ) {
-      this.errorMessage = "ERROR ADDING CANDIDATE: ENSURE CANDIDATE IS OVER 18 AND THE DEFAULT VOTE IS 0"
+    if (candidateForm.value.age < 18  ) {
+      this.errorMessage = "ERROR ADDING CANDIDATE: ENSURE CANDIDATE IS OVER 18"
       setTimeout(()=>{
         this.errorMessage = null;
       },5000)

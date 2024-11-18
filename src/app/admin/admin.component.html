@@ -77,12 +77,6 @@
             <option value="primeminister">Prime Minister</option>
         </select>
 
-        <labeL class="label">Votes:
-            <input type="number" 
-                name="votes" 
-                required ngModel>
-        </labeL>
-
         <button [disabled]="adminForm.invalid" class="btn btn-primary" type="submit">Submit</button>
 
         <p *ngIf="adminForm.invalid&&adminForm.dirty" id="errorMessage">REQUIRED FIELD</p>

@@ -86,12 +86,6 @@
             <option value="primeminister">Prime Minister</option>
         </select>
 
-        <labeL class="label">Votes:
-            <input type="number" 
-                name="votes" 
-                required 
-                [(ngModel)]="currentCandidate.votes">
-        </labeL>
 
         <button [disabled]="editForm.invalid" class="btn btn-primary" type="submit">EDIT</button>
 

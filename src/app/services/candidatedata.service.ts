@@ -1,24 +1,41 @@
 import { Injectable } from '@angular/core';
 import { Candidates } from '../model/candidates';
-import { AngularFirestore, AngularFirestoreCollection} from '@angular/fire/compat/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  DocumentReference,
+} from '@angular/fire/compat/firestore';
 
-@Injectable(
-    {
-        providedIn: 'root',
-    }
-)
-
+@Injectable({
+  providedIn: 'root',
+})
 export class CandidateDataService {
-  private dbPath = '/candidates';
+  private dbPath = 'candidates';
+  private resultsPath = 'results';
+
   errorMessage: string | null = null;
   candidatesRef: AngularFirestoreCollection<Candidates>;
 
   constructor(private db: AngularFirestore) {
-    this.candidatesRef = db.collection(this.dbPath, ref => ref.orderBy('position'));
-}
+    this.candidatesRef = db.collection
+    (this.dbPath, (ref) =>
+      ref.orderBy('position')
+    );
+  }
 
-  createCandidate(candidate: Candidates){
-    return this.candidatesRef.add({ ...candidate });
+  createCandidate(candidate: Candidates) {
+    return this.candidatesRef
+      .add({ ...candidate })
+      .then((item: DocumentReference<Candidates>) => {
+        const candidateResults = {
+          candidateId: item.id,
+          position: candidate.position,
+          name: candidate.name,
+          party: candidate.party,
+          votes: 0,
+        };
+        return this.db.collection(this.resultsPath).add(candidateResults);
+      });
   }
 
   getCandidate(id: string): Promise<Candidates> {
@@ -29,14 +46,12 @@ export class CandidateDataService {
       .then((doc) => {
         if (doc?.exists) {
           return doc.data() as Candidates;
-        } 
-        else 
-        {
+        } else {
           throw new Error('Candidate not found');
         }
       })
       .catch((err) => {
-        this.errorMessage = "Candidate not found";
+        this.errorMessage = 'Candidate not found';
         throw this.errorMessage;
       });
   }
@@ -54,18 +69,18 @@ export class CandidateDataService {
   }
 
   deleteAllCandidates(): Promise<void> {
-    return this.candidatesRef.get()
-    .toPromise()
-    .then(snapshot => {
+    return this.candidatesRef
+      .get()
+      .toPromise()
+      .then((snapshot) => {
         if (snapshot && !snapshot.empty) {
-            const batch = this.db.firestore.batch();
-            snapshot.forEach(doc => {
-                batch.delete(doc.ref);
-            });
-            return batch.commit();
+          const batch = this.db.firestore.batch();
+          snapshot.forEach((doc) => {
+            batch.delete(doc.ref);
+          });
+          return batch.commit();
         }
         return Promise.resolve();
-    });
-}
-
+      });
+  }
 }
